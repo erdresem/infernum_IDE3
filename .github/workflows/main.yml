@@ -1,0 +1,150 @@
+name: Build Infernum IDE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infernum-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-linux-x64:
+    name: Build Linux x64
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Extract uploaded Infernum build kit
+        run: |
+          test -f infernum-github-upload.zip
+          mkdir -p kit
+          unzip -q infernum-github-upload.zip -d kit
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: kit/.nvmrc
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential g++ make pkg-config python-is-python3 \
+            libx11-dev libxkbfile-dev libsecret-1-dev libkrb5-dev \
+            libgtk-3-dev libnss3 libasound2-dev libgbm-dev \
+            libxss1 libxtst6
+
+      - name: Test Infernum extension
+        working-directory: kit/extension-source
+        run: |
+          node --check webview/app.js
+          node --test tests/*.test.cjs
+
+      - name: Verify Node version
+        run: |
+          test "$(node -p 'process.versions.node')" = "$(cat kit/.nvmrc)"
+          git --version
+          npm --version
+
+      - name: Clone Code-OSS and build Infernum
+        run: |
+          chmod +x kit/scripts-clone.sh kit/Build-Linux.sh
+          ./kit/scripts-clone.sh
+          ./kit/Build-Linux.sh
+
+      - name: Create SHA256 checksum
+        run: |
+          cd kit/dist
+          sha256sum Infernum-IDE-0.7.0-Linux-x64.tar.gz > SHA256SUMS-Linux-x64.txt
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Infernum-IDE-0.7.0-Linux-x64
+          path: |
+            kit/dist/Infernum-IDE-0.7.0-Linux-x64.tar.gz
+            kit/dist/SHA256SUMS-Linux-x64.txt
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+
+  build-windows-x64:
+    name: Build Windows x64
+    runs-on: windows-2022
+    timeout-minutes: 180
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Extract uploaded Infernum build kit
+        shell: pwsh
+        run: |
+          if (-not (Test-Path 'infernum-github-upload.zip')) { throw 'infernum-github-upload.zip is missing from repository root.' }
+          New-Item -ItemType Directory -Force -Path kit | Out-Null
+          Expand-Archive -Path infernum-github-upload.zip -DestinationPath kit -Force
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: kit/.nvmrc
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test Infernum extension
+        working-directory: kit/extension-source
+        shell: pwsh
+        run: |
+          node --check webview/app.js
+          node --test tests/*.test.cjs
+
+      - name: Verify Node version
+        shell: pwsh
+        run: |
+          $Expected = (Get-Content kit/.nvmrc -Raw).Trim()
+          $Actual = (node -p "process.versions.node").Trim()
+          if ($Actual -ne $Expected) { throw "Expected Node $Expected, found $Actual" }
+          git --version
+          npm --version
+
+      - name: Clone Code-OSS and build Infernum
+        shell: pwsh
+        run: |
+          .\kit\scripts-clone.ps1
+          .\kit\Build-Windows.ps1
+
+      - name: Create SHA256 checksum
+        shell: pwsh
+        run: |
+          $Archive = Get-Item 'kit/dist/Infernum-IDE-0.7.0-Windows-x64.zip'
+          $Hash = (Get-FileHash $Archive.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$Hash  $($Archive.Name)" | Set-Content -Encoding ascii 'kit/dist/SHA256SUMS-Windows-x64.txt'
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Infernum-IDE-0.7.0-Windows-x64
+          path: |
+            kit/dist/Infernum-IDE-0.7.0-Windows-x64.zip
+            kit/dist/SHA256SUMS-Windows-x64.txt
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
