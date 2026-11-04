@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+ <defs><linearGradient id="glass" x1="10" y1="5" x2="118" y2="124" gradientUnits="userSpaceOnUse"><stop stop-color="#383a58"/><stop offset=".52" stop-color="#202538"/><stop offset="1" stop-color="#131822"/></linearGradient><linearGradient id="flame" x1="34" y1="18" x2="94" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#e1ddff"/><stop offset=".45" stop-color="#aaa7ff"/><stop offset="1" stop-color="#898fe4"/></linearGradient></defs>
+ <rect x="3" y="3" width="122" height="122" rx="31" fill="url(#glass)" stroke="#a7a9dc" stroke-opacity=".35" stroke-width="2"/>
+ <path d="M66 17c4.4 17.8-5.4 26.6-14.5 36-8.6 8.8-16.7 17-16.7 31.1a29.2 29.2 0 0 0 58.4 0c0-13.4-7.8-24.3-17.7-34.9.4 10.2-4.1 16.9-9.3 21.8C66.8 50 61.7 34.3 66 17Z" fill="none" stroke="url(#flame)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M63.8 70.5c-6.7 6.8-12 12.2-12 18.4a12.2 12.2 0 0 0 24.4 0c0-5.8-4.4-12.6-8.5-17.7-.5 4.3-2.1 6.9-4 9.2.2-4.1.2-7.2.1-9.9Z" fill="#d4d1ff" fill-opacity=".92"/>
+ <path d="M15 43c13-23 34-34 57-34" stroke="#fff" stroke-opacity=".06" stroke-width="5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,105 @@
+{
+  "iconDefinitions": {
+    "_file": {
+      "iconPath": "../media/icons/file.svg"
+    },
+    "_folder": {
+      "iconPath": "../media/icons/folder.svg"
+    },
+    "_agent": {
+      "iconPath": "../media/icons/agent.svg"
+    },
+    "_creative": {
+      "iconPath": "../media/icons/creative.svg"
+    },
+    "_debug": {
+      "iconPath": "../media/icons/debug.svg"
+    },
+    "_editor": {
+      "iconPath": "../media/icons/editor.svg"
+    },
+    "_git": {
+      "iconPath": "../media/icons/git.svg"
+    },
+    "_terminal": {
+      "iconPath": "../media/icons/terminal.svg"
+    },
+    "_settings": {
+      "iconPath": "../media/icons/settings.svg"
+    },
+    "_search": {
+      "iconPath": "../media/icons/search.svg"
+    },
+    "_extensions": {
+      "iconPath": "../media/icons/extensions.svg"
+    },
+    "_play": {
+      "iconPath": "../media/icons/play.svg"
+    },
+    "_sparkle": {
+      "iconPath": "../media/icons/sparkle.svg"
+    }
+  },
+  "file": "_file",
+  "folder": "_folder",
+  "folderExpanded": "_folder",
+  "rootFolder": "_folder",
+  "rootFolderExpanded": "_folder",
+  "fileExtensions": {
+    "ts": "_editor",
+    "tsx": "_editor",
+    "js": "_editor",
+    "jsx": "_editor",
+    "mjs": "_editor",
+    "cjs": "_editor",
+    "py": "_editor",
+    "rs": "_editor",
+    "go": "_editor",
+    "java": "_editor",
+    "cs": "_editor",
+    "cpp": "_editor",
+    "c": "_editor",
+    "json": "_settings",
+    "jsonc": "_settings",
+    "toml": "_settings",
+    "yaml": "_settings",
+    "yml": "_settings",
+    "md": "_file",
+    "mdx": "_file",
+    "html": "_file",
+    "css": "_file",
+    "scss": "_file",
+    "svg": "_file",
+    "png": "_file",
+    "jpg": "_file",
+    "jpeg": "_file",
+    "webp": "_file",
+    "ico": "_file",
+    "lock": "_settings",
+    "log": "_terminal"
+  },
+  "fileNames": {
+    "Dockerfile": "_terminal",
+    "Makefile": "_terminal",
+    ".gitignore": "_git",
+    ".editorconfig": "_settings",
+    "package.json": "_settings",
+    "tsconfig.json": "_settings"
+  },
+  "folderNames": {
+    ".git": "_git",
+    ".vscode": "_settings",
+    "src": "_folder",
+    "tests": "_debug",
+    "test": "_debug",
+    "assets": "_file",
+    "docs": "_file"
+  },
+  "folderNamesExpanded": {
+    ".git": "_git",
+    ".vscode": "_settings",
+    "src": "_folder",
+    "tests": "_debug",
+    "test": "_debug"
+  }
+}

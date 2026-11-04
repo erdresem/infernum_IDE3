@@ -1,0 +1,219 @@
+{
+  "name": "infernum-code",
+  "displayName": "Infernum AI",
+  "description": "Infernum AI coding agent built into Infernum IDE (Code-OSS fork).",
+  "version": "0.4.0",
+  "publisher": "infernum-labs",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "AI",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "claude",
+    "code-oss",
+    "coding-agent",
+    "creative-ai",
+    "cursor-style",
+    "deepseek",
+    "gemini",
+    "infernum-ide",
+    "lm-studio",
+    "local-ai",
+    "ollama",
+    "openai",
+    "single-model",
+    "vllm"
+  ],
+  "icon": "media/icon.png",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onView:infernum.sidebar",
+    "onCommand:infernum.open",
+    "onCommand:infernum.addAgent"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "secondarySidebar": [
+        {
+          "id": "infernum",
+          "title": "Infernum AI",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "infernum": [
+        {
+          "id": "infernum.sidebar",
+          "name": "Infernum AI",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "infernum.open",
+        "title": "Infernum: Open"
+      },
+      {
+        "command": "infernum.addAgent",
+        "title": "Infernum: Add AI Agent"
+      },
+      {
+        "command": "infernum.ask",
+        "title": "Infernum: Ask Infernum",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "infernum.fix",
+        "title": "Infernum: Fix with Infernum",
+        "icon": "$(wrench)"
+      },
+      {
+        "command": "infernum.explain",
+        "title": "Infernum: Explain with Infernum",
+        "icon": "$(book)"
+      },
+      {
+        "command": "infernum.refactor",
+        "title": "Infernum: Refactor with Infernum",
+        "icon": "$(wand)"
+      },
+      {
+        "command": "infernum.cancel",
+        "title": "Infernum: Stop Agent"
+      },
+      {
+        "command": "infernum.importAgent",
+        "title": "Infernum: Import Agent"
+      },
+      {
+        "command": "infernum.exportAgent",
+        "title": "Infernum: Export Agent"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "infernum.ask",
+          "when": "editorHasSelection",
+          "group": "infernum@1"
+        },
+        {
+          "command": "infernum.fix",
+          "when": "editorHasSelection",
+          "group": "infernum@2"
+        },
+        {
+          "command": "infernum.explain",
+          "when": "editorHasSelection",
+          "group": "infernum@3"
+        },
+        {
+          "command": "infernum.refactor",
+          "when": "editorHasSelection",
+          "group": "infernum@4"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "infernum.cancel",
+          "when": "infernum.agentRunning"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "infernum.open",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i"
+      },
+      {
+        "command": "infernum.ask",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Infernum IDE",
+      "properties": {
+        "infernum.maxAgentSteps": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Maximum tool iterations per Agent Mode request."
+        },
+        "infernum.maxContextFiles": {
+          "type": "number",
+          "default": 80,
+          "minimum": 10,
+          "maximum": 300,
+          "description": "Maximum workspace files listed to an agent."
+        },
+        "infernum.defaultMode": {
+          "type": "string",
+          "enum": [
+            "chat",
+            "agent",
+            "code",
+            "debug",
+            "explain",
+            "plan",
+            "review"
+          ],
+          "default": "agent",
+          "description": "Default interaction mode."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "workbench.colorTheme": "Infernum Midnight",
+      "workbench.iconTheme": "infernum-file-icons",
+      "workbench.sideBar.location": "left",
+      "workbench.panel.defaultLocation": "bottom",
+      "workbench.secondarySideBar.defaultVisibility": true,
+      "workbench.startupEditor": "none",
+      "window.commandCenter": true,
+      "editor.minimap.enabled": false,
+      "editor.fontLigatures": true,
+      "editor.smoothScrolling": true,
+      "editor.cursorSmoothCaretAnimation": "on",
+      "editor.bracketPairColorization.enabled": true,
+      "explorer.compactFolders": false,
+      "workbench.tree.indent": 14,
+      "workbench.list.smoothScrolling": true,
+      "workbench.editor.tabSizing": "shrink"
+    },
+    "themes": [
+      {
+        "label": "Infernum Midnight",
+        "uiTheme": "vs-dark",
+        "path": "./themes/infernum-color-theme.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "infernum-file-icons",
+        "label": "Infernum File Icons",
+        "path": "./icons/infernum-file-icon-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "test": "npm run compile && node --test tests/*.test.cjs",
+    "package": "npm run compile && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

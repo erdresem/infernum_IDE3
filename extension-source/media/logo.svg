@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="190" viewBox="0 0 760 190" role="img" aria-labelledby="title desc">
+  <title id="title">Infernum Code</title><desc id="desc">A luminous violet flame mark beside the Infernum Code wordmark.</desc>
+  <defs>
+    <linearGradient id="flame" x1="18" y1="14" x2="150" y2="170" gradientUnits="userSpaceOnUse"><stop stop-color="#E7D9FF"/><stop offset=".42" stop-color="#A78BFA"/><stop offset="1" stop-color="#6841C7"/></linearGradient>
+    <linearGradient id="word" x1="220" y1="40" x2="680" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#F4F0FF"/><stop offset="1" stop-color="#B7A4E9"/></linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+  </defs>
+  <rect x="8" y="8" width="174" height="174" rx="42" fill="#171326" stroke="#6C55A8" stroke-opacity=".6"/>
+  <path d="M101 25c7 37-42 49-45 91-2 20 7 36 22 46-2-29 22-43 38-60 35 30 50 58 35 94-13 30-44 45-76 35-49-15-62-83-31-128 22-33 69-48 86-98Z" fill="url(#flame)" transform="translate(0 -9) scale(.88) translate(11 13)" filter="url(#glow)"/>
+  <path d="M126 84c25 30 32 55 15 83" fill="none" stroke="#F3ECFF" stroke-width="8" stroke-linecap="round" opacity=".85"/>
+  <path d="M218 78h21v-23h-21V35h-17v20h-16v20h16v56c0 20 10 30 30 30h10v-19h-7c-11 0-16-5-16-16V78Zm50-43h-23v22h23V35Zm-1 38h-21v87h21V73Zm100-2c-15 0-27 6-35 17V73h-21v87h21v-45c0-17 9-27 24-27s23 10 23 26v46h21v-51c0-25-13-38-33-38Zm122 0c-15 0-27 6-35 17V73h-21v87h21v-45c0-17 9-27 24-27s23 10 23 26v46h21v-51c0-25-13-38-33-38Z" fill="url(#word)"/>
+  <text x="188" y="184" fill="#9885C2" font-family="Inter,Arial,sans-serif" font-size="13" letter-spacing="5">INTELLIGENCE, BUILT INTO YOUR WORKSPACE</text>
+</svg>
